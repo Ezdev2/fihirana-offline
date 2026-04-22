@@ -6,7 +6,17 @@ Ce document décrit les étapes manuelles à suivre pour envoyer une nouvelle ve
 
 1.  **Changer la version :** Ouvre `src-tauri/tauri.conf.json` et incrémente la version.
       * *Exemple :* `"version": "1.0.1"`
-2.  **Build de l'APK :**
+
+2. **Tester en local à l'aide d'un appareil connecté :**
+    ```bash
+    # Pour vérifier les appareils, dans le terminale lancer
+    adb devices 
+
+    # Connecter un appareil
+    adb connect 192... (activer la mode dévéloppeur sur mobile à l'aide d'un hotpot ou par câble) 
+    ```
+
+3.  **Build de l'APK :**
     ```bash
     # Dans android studio (Lancer dans le terminal dans /android-studio/bin)
     sh /opt/android-studio/bin/studio.sh
@@ -36,6 +46,17 @@ Ce document décrit les étapes manuelles à suivre pour envoyer une nouvelle ve
     # 3. Lancer le build
     npx tauri android init
     npx tauri android build
+
+    en cas de changement mineau on peut faire :
+    # Recompiler l\'application
+    # Build : 
+    npm run tauri android build -- --release
+
+    #Signe à nouveau : (Reprends la commande apksigner).
+
+    # Réinstalle : 
+    adb install -r fihirana-final.apk.
+    
     ```
 
 -----
@@ -74,6 +95,10 @@ Modifie le fichier `update.json` à la racine du projet local avec les nouvelles
 -----
 
 ## 4. Déploiement Final
+
+### Mettre en place un logo (Icones de l'application)
+
+> npm run tauri icon ./src/assets/logo192.png
 
 Une fois le fichier `update.json` modifié localement :
 

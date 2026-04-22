@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { songs as initialSongs } from "./data/songs";
-import { check } from "@tauri-apps/plugin-updater";
-import { relaunch } from "@tauri-apps/plugin-process";
+// import { check } from "@tauri-apps/plugin-updater";
+// import { relaunch } from "@tauri-apps/plugin-process";
 import logo from "./assets/logo192.png";
 import {
-  ArrowUpRight,
+  // ArrowUpRight,
   BookOpen,
-  ChevronLeft,
+  // ChevronLeft,
   ChevronRight,
   Download,
   Filter,
@@ -177,50 +177,34 @@ export default function App() {
     setSelectedSong(null);
   };
 
-  // const handleFetchUpdate = () => {
-  //   if (!isOnline) {
-  //     setUpdateMessage('Turn on online mode first to fetch a new JSON from Firebase later.');
-  //     return;
-  //   }
-  //   setIsUpdating(true);
-  //   setUpdateMessage('Checking your remote song source...');
-  //   window.setTimeout(() => {
-  //     const syncTime = new Date().toISOString();
-  //     setIsUpdating(false);
-  //     setLastSyncAt(syncTime);
-  //     localStorage.setItem(LAST_SYNC_STORAGE_KEY, syncTime);
-  //     setUpdateMessage('Sync simulation complete. Replace the placeholder URL with your Firebase endpoint later.');
-  //   }, 1600);
-  // };
+  const STORE_URL =
+    "https://store.ezrafanomezantsoa.site/app/fihirana-jesosy-mpanafaka";
 
-  const handleUpdate = async () => {
-    setIsUpdating(true);
-    setUpdateMessage("Connexion au serveur...");
-
-    try {
-      // 1. On récupère le JSON depuis un point d'accès (GitHub)
-      const response = await fetch("https://ton-url.com/fihirana_export.json");
-
-      if (!response.ok) throw new Error("Impossible de joindre le serveur");
-
-      const freshSongs = await response.json();
-
-      // 2. On sauvegarde dans le localStorage du téléphone
-      localStorage.setItem("fihirana_db_updated", JSON.stringify(freshSongs));
-
-      // 3. On met à jour l'UI
-      setUpdateMessage("Mise à jour réussie ! Redémarrage...");
-
-      setTimeout(() => {
-        window.location.reload(); // Recharge l'app pour charger les nouveaux chants
-      }, 1500);
-    } catch (error) {
-      console.error("Erreur:", error);
-      setUpdateMessage("Erreur : Vérifiez votre connexion internet.");
-    } finally {
-      setIsUpdating(false);
-    }
+  const handleRedirectToStore = () => {
+    setUpdateMessage("Ouverture du store...");
+    window.open(STORE_URL, "_blank");
   };
+
+  /**
+   * FONCTION DE MISE À JOUR DU CONTENU (JSON) - À ACTIVER PLUS TARD
+   * * const handleJsonUpdate = async () => {
+   * setIsUpdating(true);
+   * setUpdateMessage("Vérification des nouveaux chants...");
+   * try {
+   * const response = await fetch(JSON_DATA_URL);
+   * if (!response.ok) throw new Error("Serveur injoignable");
+   * * const freshSongs = await response.json();
+   * * // Sauvegarde dans le storage local utilisé par ton app Fihirana
+   * localStorage.setItem("fihirana_db_updated", JSON.stringify(freshSongs));
+   * * setUpdateMessage("Chants mis à jour avec succès ! Redémarrage...");
+   * setTimeout(() => window.location.reload(), 1500);
+   * } catch (error) {
+   * setUpdateMessage("Erreur de synchronisation. Vérifiez votre connexion.");
+   * } finally {
+   * setIsUpdating(false);
+   * }
+   * };
+   */
 
   const renderSongCard = (
     song: Song,
@@ -630,7 +614,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/70 bg-white/85 p-5 shadow-sm">
+        {/* <div className="rounded-[28px] border border-white/70 bg-white/85 p-5 shadow-sm">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="text-sm font-semibold text-slate-900">
@@ -656,7 +640,7 @@ export default function App() {
               />
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* <div className="rounded-[28px] border border-white/70 bg-white/85 p-5 shadow-sm">
           <p className="text-sm font-semibold text-slate-900">Firebase fetch URL placeholder</p>
@@ -681,7 +665,7 @@ export default function App() {
           </p>
           <button
             type="button"
-            onClick={handleUpdate}
+            onClick={handleRedirectToStore}
             disabled={isUpdating}
             className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
           >
