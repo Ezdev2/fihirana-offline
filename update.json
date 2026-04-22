@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "notes": "Version initiale de Fihirana Jesosy Mpanafaka Offline.",
+  "pub_date": "2026-04-08T15:00:00Z",
+  "platforms": {
+    "android-aarch64": {
+      "url": "https://github.com/ezdev2/fihirana-offline/releases/download/v1.0.0/app-release.apk"
+    }
+  }
+}

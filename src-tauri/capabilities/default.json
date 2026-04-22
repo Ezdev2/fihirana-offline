@@ -1,0 +1,9 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "default",
+  "description": "Autorisations pour Fihirana Offline sur Android",
+  "windows": ["main"],
+  "permissions": [
+    "core:default"
+  ]
+}
